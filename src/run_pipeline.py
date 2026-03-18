@@ -11,6 +11,7 @@ from load_staging import load_staging
 from etl_scd1 import etl_scd1, show_result as show_scd1
 from etl_scd2 import etl_scd2, show_result as show_scd2
 from etl_scd3 import etl_scd3, show_result as show_scd3
+from quality_checks import run_checks
 
 LOAD_DATES = ["2025-01-01", "2025-02-01", "2025-03-01"]
 
@@ -31,6 +32,7 @@ def run_scd(scd_type):
     for tag in range(1, 4):
         print(f"\n--- Day {tag} ({LOAD_DATES[tag-1]}) ---")
         load_staging(tag, DB_PATH)
+        run_checks(DB_PATH)
 
         if scd_type == 1:
             etl_scd1(DB_PATH)
