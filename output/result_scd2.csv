@@ -1,0 +1,12 @@
+sk_kunde,kunden_id,name,stadt,region,kategorie,gueltig_von,gueltig_bis,ist_aktuell,vorherige_stadt,vorherige_region,vorherige_kategorie
+1,1,Maxx Müller,Berlin,Ost,Standard,2025-01-01,2025-02-01,0,,,
+6,1,Max Müller,Berlin,Ost,Standard,2025-02-01,2025-03-01,0,,,
+9,1,Max Müller,Stuttgart,Süd,Standard,2025-03-01,9999-12-31,1,,,
+2,2,Anna Schmidt,Hamburg,Nord,Premium,2025-01-01,2025-03-01,0,,,
+10,2,Anna Schmidt,Hamburg,Nord,Gold,2025-03-01,9999-12-31,1,,,
+3,3,Tom Weber,München,Süd,Standard,2025-01-01,2025-02-01,0,,,
+7,3,Tom Weber,Frankfurt,West,Standard,2025-02-01,9999-12-31,1,,,
+4,4,Lisa Fischer,Köln,West,Standard,2025-01-01,2025-02-01,0,,,
+8,4,Lisa Fischer,Köln,West,Premium,2025-02-01,9999-12-31,1,,,
+5,5,Jan Hoffmann,Dresden,Ost,Premium,2025-01-01,2025-03-01,0,,,
+11,5,Jann Hoffmann,Dresden,Ost,Premium,2025-03-01,9999-12-31,1,,,
