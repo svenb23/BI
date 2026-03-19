@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_kunden
+    columns:
+      - name: kunden_id
+        tests:
+          - not_null
+          - unique
+      - name: name
+        tests:
+          - not_null
+      - name: stadt
+        tests:
+          - not_null
+
+  - name: stg_produkte
+    columns:
+      - name: produkt_id
+        tests:
+          - not_null
+          - unique
+      - name: bezeichnung
+        tests:
+          - not_null
+
+  - name: stg_verkauefe
+    columns:
+      - name: kunden_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_kunden')
+              field: kunden_id
+      - name: produkt_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_produkte')
+              field: produkt_id
