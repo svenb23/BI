@@ -12,6 +12,7 @@ from etl_scd1 import etl_scd1, show_result as show_scd1
 from etl_scd2 import etl_scd2, show_result as show_scd2
 from etl_scd3 import etl_scd3, show_result as show_scd3
 from quality_checks import run_checks
+from etl_dimensions import load_dim_produkt, load_dim_zeit, load_fakt_verkauf, show_star_schema
 
 LOAD_DATES = ["2025-01-01", "2025-02-01", "2025-03-01"]
 
@@ -41,6 +42,11 @@ def run_scd(scd_type):
         elif scd_type == 3:
             etl_scd3(DB_PATH)
 
+    # load remaining dimensions and facts
+    load_dim_produkt(DB_PATH)
+    load_dim_zeit(DB_PATH)
+    load_fakt_verkauf(DB_PATH)
+
     print(f"\n--- Final result SCD Type {scd_type} ---")
     if scd_type == 1:
         show_scd1(DB_PATH)
@@ -48,6 +54,9 @@ def run_scd(scd_type):
         show_scd2(DB_PATH)
     elif scd_type == 3:
         show_scd3(DB_PATH)
+
+    print(f"\n--- Star Schema Queries (SCD Type {scd_type}) ---")
+    show_star_schema(DB_PATH)
 
 
 if __name__ == "__main__":
