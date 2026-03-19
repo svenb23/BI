@@ -5,4 +5,4 @@ SELECT
     stadt,
     region,
     kategorie
-FROM {{ ref('kunden_tag1') }}
+FROM {{ ref('kunden_tag3') }}
