@@ -1,0 +1,267 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{tikz}
+
+\usepackage[scaled]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+\usepackage{setspace}
+\setstretch{1.5}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\usepackage{microtype}
+\sloppy
+\hyphenpenalty=1000
+\tolerance=3000
+
+\renewcommand{\footnotesize}{\fontsize{10}{12}\selectfont}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\fontsize{12}{14}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{12}{14}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\fontsize{12}{14}\bfseries}{\thesubsubsection}{1em}{}
+
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=blue,
+  filecolor=black,
+  urlcolor=blue
+]{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage}
+
+\usepackage[backend=biber, style=apa]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{titling}
+
+\usepackage[german=quotes]{csquotes}
+
+\usepackage{caption}
+\usepackage{threeparttable}
+\captionsetup[table]{
+    font=small,
+    skip=10pt,
+    labelfont=bf
+}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red!60!black},
+    showstringspaces=false,
+    tabsize=4
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \thispagestyle{empty}
+    \centering
+    \vspace*{5cm}
+    {\Huge\bfseries Projekt: Business Intelligence IWBI02 \par}
+    \vspace{1cm}
+    {\Large Projektbericht \par}
+    \vspace{0.3cm}
+    {\large Aufgabenstellung 3: Prototypische Umsetzung von ETL-Prozessen am Beispiel der Slowly Changing Dimensions (SCD) \par}
+    \vspace{0.5cm}
+    {\large Studiengang: Angewandte Künstliche Intelligenz \par}
+    \vspace{0.5cm}
+    {\large Sven Behrens \par}
+    \vspace{0.5cm}
+    {\large Matrikelnummer: 42303511 \par}
+    \vspace{0.5cm}
+    {\large \today \par}
+\end{titlepage}
+
+\pagenumbering{Roman}
+\setcounter{page}{1}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\newpage
+
+\listoftables
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% ============================================================
+% 1. EINLEITUNG
+% ============================================================
+\section{Einleitung}
+
+\subsection{Problemstellung und Relevanz}
+% TODO
+
+\subsection{Zielsetzung}
+% TODO
+
+\subsection{Methodisches Vorgehen und Aufbau der Arbeit}
+% TODO
+
+% ============================================================
+% 2. THEORETISCHE GRUNDLAGEN
+% ============================================================
+\section{Theoretische Grundlagen}
+
+\subsection{Data Warehousing und Star-Schema}
+% TODO
+
+\subsection{ETL-Prozesse}
+% TODO
+
+\subsection{Slowly Changing Dimensions}
+% TODO
+
+\subsubsection{SCD Typ 1 -- Überschreiben}
+% TODO
+
+\subsubsection{SCD Typ 2 -- Historisierung durch neue Zeile}
+% TODO
+
+\subsubsection{SCD Typ 3 -- Vorheriger Wert in zusätzlicher Spalte}
+% TODO
+
+% ============================================================
+% 3. KONZEPTION DER BEISPIELE
+% ============================================================
+\section{Konzeption der Beispiele}
+
+\subsection{Geschäftsszenario}
+% TODO
+
+\subsection{Änderungsszenarien für die SCD-Typen}
+% TODO
+
+% ============================================================
+% 4. WERKZEUGAUSWAHL
+% ============================================================
+\section{Auswahl, Installation und Konfiguration der Werkzeuge}
+
+\subsection{Anforderungen an die Werkzeuge}
+% TODO
+
+\subsection{Prototyp: Python und SQLite}
+% TODO
+
+\subsection{Professioneller Stack: dbt und PostgreSQL}
+% TODO
+
+\subsection{Vergleich und Begründung}
+% TODO
+
+% ============================================================
+% 5. DATENMODELL
+% ============================================================
+\section{Erstellung des Datenmodells}
+
+\subsection{Star-Schema}
+% TODO
+
+\subsection{Dimensionstabellen}
+% TODO
+
+\subsection{Faktentabelle}
+% TODO
+
+\subsection{Testdatengenerierung}
+% TODO
+
+% ============================================================
+% 6. ETL-PROZESSE
+% ============================================================
+\section{Prototypische Entwicklung der ETL-Prozesse}
+
+\subsection{Pipeline-Architektur}
+% TODO
+
+\subsection{Staging Area}
+% TODO
+
+\subsection{Datenqualitätsprüfungen}
+% TODO
+
+\subsection{SCD Typ 1 -- Implementierung und Ergebnis}
+% TODO
+
+\subsection{SCD Typ 2 -- Implementierung und Ergebnis}
+% TODO
+
+\subsection{SCD Typ 3 -- Implementierung und Ergebnis}
+% TODO
+
+\subsection{Umsetzung mit dbt}
+% TODO
+
+% ============================================================
+% 7. ERGEBNISSE UND VERGLEICH
+% ============================================================
+\section{Ergebnisse und Vergleich der SCD-Typen}
+
+\subsection{Gegenüberstellung der Ergebnisse}
+% TODO
+
+\subsection{Vor- und Nachteile der SCD-Typen}
+% TODO
+
+\subsection{Empfehlung für die Praxis}
+% TODO
+
+% ============================================================
+% 8. FAZIT
+% ============================================================
+\section{Fazit und Ausblick}
+% TODO
+
+% ============================================================
+% LITERATURVERZEICHNIS
+% ============================================================
+\newpage
+\printbibliography[title=Literaturverzeichnis]
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+
+% ============================================================
+% ANHANG
+% ============================================================
+\newpage
+\appendix
+\section*{Anhang}
+\addcontentsline{toc}{section}{Anhang}
+
+% TODO: Quellcode, Screenshots, vollständige Tabellen
+
+\end{document}
