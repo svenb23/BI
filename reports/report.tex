@@ -171,10 +171,18 @@ Für die Strukturierung der Daten im \gls{dwh} hat sich unter anderem das dimens
 Schema ist das Star-Schema, bei dem eine zentrale Faktentabelle über Fremdschlüssel mit mehreren Dimensionstabellen 
 verbunden ist. Die Faktentabelle enthält messbare Kennzahlen wie Umsatz oder Menge, 
 während die Dimensionstabellen beschreibende Attribute wie Kunden-, Produkt- oder Zeitinformationen bereitstellen. 
-Die Bezeichnung Star-Schema ergibt sich aus der sternförmigen Anordnung der Dimensionstabellen um die Faktentabelle \parencite[S.~60--62]{kemper2010bi}.
+Die Bezeichnung Star-Schema ergibt sich aus der sternförmigen Anordnung der Dimensionstabellen um die Faktentabelle \parencite[S.~60--62]{baars2021bi}.
 
 \subsection{ETL-Prozesse}
-% TODO
+Der \gls{etl}-Prozess beschreibt den dreistufigen Ablauf, mit dem Daten aus operativen Quellsystemen in das \gls{dwh} überführt 
+werden \parencite[S.~25]{baars2021bi}. In der Extract-Phase werden die relevanten Daten aus den Quellsystemen extrahiert 
+und in eine Staging Area geladen \parencite[S.~27--28]{baars2021bi}. Die Transform-Phase bereinigt, harmonisiert und 
+transformiert die Daten in das Zielformat des \gls{dwh} \parencite[S.~30--33]{baars2021bi}. In der abschließenden 
+Load-Phase werden die aufbereiteten Daten in die Zieltabellen des \gls{cdwh} geladen \parencite[S.~36]{baars2021bi}.
+
+Die Staging Area dient dabei als Zwischenspeicher und entkoppelt die Extraktion von der Transformation. Dadurch wird 
+sichergestellt, dass die Quellsysteme nur kurzzeitig belastet werden und die Datenqualität vor dem Laden in das \gls{dwh} 
+geprüft werden kann \parencite[S.~27--28]{baars2021bi}.
 
 \subsection{Slowly Changing Dimensions}
 % TODO
