@@ -66,3 +66,6 @@ Videos/
 *.lot
 *.bcf
 *.run.xml
+reports/report.ist
+reports/report.glo
+reports/report.acn

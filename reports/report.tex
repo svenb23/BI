@@ -81,6 +81,14 @@
     tabsize=4
 }
 
+\usepackage[acronym,nonumberlist,toc]{glossaries}
+\makeglossaries
+
+\newacronym{scd}{SCD}{Slowly Changing Dimensions}
+\newacronym{etl}{ETL}{Extract, Transform, Load}
+\newacronym{dwh}{DWH}{Data Warehouse}
+\newacronym{dbt}{dbt}{data build tool}
+
 \begin{document}
 
 \begin{titlepage}
@@ -116,6 +124,9 @@
 \addcontentsline{toc}{section}{Tabellenverzeichnis}
 \newpage
 
+\printglossary[type=\acronymtype,title=Abkürzungsverzeichnis]
+\newpage
+
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
@@ -125,13 +136,24 @@
 \section{Einleitung}
 
 \subsection{Problemstellung und Relevanz}
-% TODO
+Stammdaten in einem Data Warehouse unterliegen einem ständigen Wandel: Kunden ziehen um, 
+Produkte werden umkategorisiert und Organisationsstrukturen ändern sich. Die zentrale Herausforderung 
+besteht darin, solche Änderungen im Data Warehouse korrekt zu erfassen und dabei je nach Anforderung die 
+historischen Werte zu bewahren oder gezielt zu überschreiben. Die unter dem Begriff \gls{scd} 
+zusammengefassten Methoden bieten hierfür standardisierte Lösungsansätze \parencite[S.~181]{linstedt2015data}.
 
 \subsection{Zielsetzung}
-% TODO
+Ziel dieser Arbeit ist die prototypische Umsetzung von ETL-Prozessen unter Berücksichtigung der SCD-Typen 
+1, 2 und 3. Anhand eines konkreten Geschäftsszenarios werden die drei Typen implementiert, ihre Auswirkungen 
+auf das Datenmodell dargestellt und die jeweiligen Vor- und Nachteile verglichen. Die Umsetzung erfolgt zunächst 
+als Python-Prototyp mit SQLite und anschließend mit dem professionellen Stack dbt und PostgreSQL.
 
 \subsection{Methodisches Vorgehen und Aufbau der Arbeit}
-% TODO
+Die Arbeit gliedert sich in acht Kapitel. Nach der Einleitung werden in Kapitel~2 die theoretischen 
+Grundlagen zu Data Warehousing, ETL-Prozessen und Slowly Changing Dimensions erläutert. Kapitel~3 beschreibt 
+die Konzeption der Beispielszenarien. In Kapitel~4 erfolgt die Auswahl und Begründung der eingesetzten Werkzeuge. 
+Kapitel~5 stellt das erstellte Datenmodell vor. Die prototypische Implementierung der ETL-Prozesse wird in 
+Kapitel~6 dokumentiert. Kapitel~7 vergleicht die Ergebnisse der drei SCD-Typen. Die Arbeit schließt mit einem Fazit in Kapitel~8.
 
 % ============================================================
 % 2. THEORETISCHE GRUNDLAGEN
