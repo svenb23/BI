@@ -248,7 +248,11 @@ Für den ersten Prototyp wurde Python (Version 3.13) in Kombination mit SQLite a
  die über ein zentrales Pipeline-Skript orchestriert werden.
 
 \subsection{Professioneller Stack: dbt und PostgreSQL}
-% TODO
+Ergänzend zum Python-Prototyp wurde eine zweite Umsetzung mit praxisnahen Werkzeugen realisiert. Als Datenbank dient PostgreSQL 
+(Version 17), ein weit verbreitetes relationales Open-Source-Datenbanksystem. Für die Transformation kommt \gls{dbt} zum Einsatz, 
+ein SQL-basiertes Open-Source-Werkzeug, das in der Industrie zunehmend als Standard für die Transform- und Load-Phase eingesetzt wird \parencite[S.~2]{dorsey2025dbt}.
+dbt bietet mit der Snapshot-Funktionalität eine eingebaute Umsetzung von \gls{scd} Typ 2, bei der Änderungen automatisch erkannt
+und historisiert werden. Die Datenqualität wird über deklarative Tests in YAML-Dateien sichergestellt.
 
 \subsection{Vergleich und Begründung}
 % TODO
