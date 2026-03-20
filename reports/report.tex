@@ -234,10 +234,18 @@ Adressänderungen durch Umzüge (Typ 2) und Änderungen der Kundenkategorie (Typ
 \section{Auswahl, Installation und Konfiguration der Werkzeuge}
 
 \subsection{Anforderungen an die Werkzeuge}
-% TODO
+Für die prototypische Umsetzung der \gls{etl}-Prozesse werden Werkzeuge benötigt, die folgende Anforderungen erfüllen: 
+Open-Source-Verfügbarkeit, Unterstützung relationaler Datenmodelle, Möglichkeit zur Implementierung individueller Transformationslogik 
+sowie eine nachvollziehbare und dokumentierbare Arbeitsweise. Darüber hinaus soll die Lösung lokal ausführbar sein, um 
+eine unabhängige Reproduzierbarkeit zu gewährleisten.
 
 \subsection{Prototyp: Python und SQLite}
-% TODO
+Für den ersten Prototyp wurde Python (Version 3.13) in Kombination mit SQLite als Datenbank gewählt.
+ Python bietet mit der Standardbibliothek \texttt{sqlite3} eine integrierte Datenbankanbindung ohne zusätzliche Installation. 
+ Die Bibliothek \texttt{pandas} wird für das Einlesen und Verarbeiten der CSV-Quelldaten verwendet. 
+ SQLite speichert die gesamte Datenbank in einer einzelnen Datei, wodurch kein Datenbankserver eingerichtet werden muss. 
+ Die \gls{etl}-Logik für alle drei \gls{scd}-Typen wird als eigenständige Python-Skripte implementiert, 
+ die über ein zentrales Pipeline-Skript orchestriert werden.
 
 \subsection{Professioneller Stack: dbt und PostgreSQL}
 % TODO
