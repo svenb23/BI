@@ -213,10 +213,16 @@ nachvollziehbar. Dieser Ansatz bietet einen Kompromiss zwischen Einfachheit und 
 \section{Konzeption der Beispiele}
 
 \subsection{Geschäftsszenario}
-% TODO
+Als Grundlage für die Demonstration der \gls{scd}-Typen dient ein fiktives Handelsunternehmen, das Produkte an 
+Endkunden verkauft. Das Unternehmen verwaltet Stammdaten zu Kunden, Produkten und Verkaufstransaktionen. 
+Im Fokus steht die Kundendimension, da sich Kundenattribute wie Adresse, Name oder Kundenkategorie über die Zeit 
+verändern können und somit typische Anwendungsfälle für \gls{scd} darstellen.
+
+Das Datenmodell folgt dem Star-Schema mit drei Dimensionstabellen (Kunde, Produkt, Zeit) und einer zentralen 
+Faktentabelle (Verkauf). Um die Auswirkungen der drei \gls{scd}-Typen vergleichbar zu machen, werden identische 
+Quelldaten verwendet und über drei simulierte Zeitpunkte (Tag 1 bis Tag 3) geladen.
 
 \subsection{Änderungsszenarien für die SCD-Typen}
-% TODO
 
 % ============================================================
 % 4. WERKZEUGAUSWAHL
