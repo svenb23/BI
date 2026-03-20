@@ -185,16 +185,27 @@ sichergestellt, dass die Quellsysteme nur kurzzeitig belastet werden und die Dat
 geprüft werden kann \parencite[S.~27--28]{baars2021bi}.
 
 \subsection{Slowly Changing Dimensions}
-% TODO
+Dimensionstabellen enthalten Stammdaten, die sich im Laufe der Zeit ändern können. Unter dem Begriff 
+\gls{scd} werden Methoden zusammengefasst, die beschreiben, wie solche Änderungen in Dimensionstabellen 
+erfasst und gespeichert werden \parencite[S.~181]{linstedt2015data}. Die drei gängigsten Typen unterscheiden sich darin, ob und in welchem 
+Umfang historische Werte erhalten bleiben.
 
 \subsubsection{SCD Typ 1 -- Überschreiben}
-% TODO
+Bei Typ 1 wird der alte Wert in der Dimensionstabelle durch den neuen Wert ersetzt. Es findet keine 
+Historisierung statt. Der vorherige Zustand ist nach der Aktualisierung nicht mehr nachvollziehbar. 
+Dieser Ansatz eignet sich für Korrekturen wie Tippfehler, bei denen der alte Wert nicht erhaltenswert ist \parencite[S.~181]{linstedt2015data}.
 
 \subsubsection{SCD Typ 2 -- Historisierung durch neue Zeile}
-% TODO
+Bei Typ 2 wird bei einer Änderung der bestehende Datensatz mit einem Enddatum versehen und ein 
+neuer Datensatz mit den aktuellen Werten angelegt. Dadurch entsteht eine vollständige Historie aller 
+Änderungen. Zur Unterscheidung der Versionen werden ein Surrogate Key, Gültigkeitszeiträume (gültig von/bis) 
+sowie ein Aktualitäts-Flag eingesetzt. Typ 2 ist der am häufigsten verwendete Ansatz, wenn historische Analysen 
+erforderlich sind \parencite[S.~181]{linstedt2015data}.
 
 \subsubsection{SCD Typ 3 -- Vorheriger Wert in zusätzlicher Spalte}
-% TODO
+Bei Typ 3 wird eine zusätzliche Spalte in der Dimensionstabelle angelegt, die den vorherigen Wert 
+speichert. Die Tabelle wächst nicht in der Zeilenanzahl, jedoch ist nur der unmittelbar vorherige Wert 
+nachvollziehbar. Dieser Ansatz bietet einen Kompromiss zwischen Einfachheit und begrenzter Historisierung \parencite[S.~182]{linstedt2015data}.
 
 % ============================================================
 % 3. KONZEPTION DER BEISPIELE
