@@ -88,6 +88,7 @@
 \newacronym{etl}{ETL}{Extract, Transform, Load}
 \newacronym{dwh}{DWH}{Data Warehouse}
 \newacronym{dbt}{dbt}{data build tool}
+\newacronym{cdwh}{C-DWH}{Core Data Warehouse}
 
 \begin{document}
 
@@ -161,7 +162,16 @@ Kapitel~6 dokumentiert. Kapitel~7 vergleicht die Ergebnisse der drei SCD-Typen. 
 \section{Theoretische Grundlagen}
 
 \subsection{Data Warehousing und Star-Schema}
-% TODO
+Ein \gls{dwh} ist ein unternehmensweites System zur Sammlung, Integration und Bereitstellung von Daten für analytische 
+Zwecke \parencite[S.~171]{linstedt2015data}. Daten aus unterschiedlichen Quellsystemen werden dabei zusammengeführt. 
+Das \gls{dwh} besteht typischerweise aus mehreren Schichten: einer Staging Area für die Zwischenspeicherung der extrahierten Rohdaten, 
+dem \gls{cdwh} als zentralem, integriertem Datenbestand sowie Data Marts für abteilungsspezifische Auswertungen \parencite[S.~56]{gansor2010bicc}.
+
+Für die Strukturierung der Daten im \gls{dwh} hat sich unter anderem das dimensionale Modell etabliert. Das bekannteste 
+Schema ist das Star-Schema, bei dem eine zentrale Faktentabelle über Fremdschlüssel mit mehreren Dimensionstabellen 
+verbunden ist. Die Faktentabelle enthält messbare Kennzahlen wie Umsatz oder Menge, 
+während die Dimensionstabellen beschreibende Attribute wie Kunden-, Produkt- oder Zeitinformationen bereitstellen. 
+Die Bezeichnung Star-Schema ergibt sich aus der sternförmigen Anordnung der Dimensionstabellen um die Faktentabelle \parencite[S.~60--62]{kemper2010bi}.
 
 \subsection{ETL-Prozesse}
 % TODO
