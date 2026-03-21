@@ -286,10 +286,17 @@ generierten Datumsbereich für das Jahr 2025 aufgebaut und enthält die Attribut
 \texttt{jahr}, \texttt{monat}, \texttt{quartal}, \texttt{tag} und \texttt{wochentag}.
 
 \subsection{Faktentabelle}
-% TODO
+Die Faktentabelle \texttt{fakt\_verkauf} speichert die Verkaufstransaktionen mit den Kennzahlen \texttt{menge} 
+und \texttt{umsatz}. Über die Fremdschlüssel \texttt{sk\_kunde}, \texttt{sk\_produkt} und \texttt{datum} wird 
+jede Transaktion den entsprechenden Dimensionen zugeordnet. Der Surrogate Key \texttt{sk\_kunde} verweist dabei 
+auf den zum Zeitpunkt des Verkaufs gültigen Kundendatensatz, was insbesondere bei \gls{scd} Typ 2 relevant ist.
 
 \subsection{Testdatengenerierung}
-% TODO
+Die Testdaten werden über ein Python-Skript als CSV-Dateien generiert und simulieren ein operatives Quellsystem. 
+Der initiale Datenbestand umfasst fünf Kunden, fünf Produkte und acht Verkaufstransaktionen. Für die Kundendimension 
+werden drei Versionen der Quelldaten erzeugt (Tag 1 bis Tag 3), die jeweils gezielte Änderungen enthalten. 
+Die Produkt- und Verkaufsdaten bleiben über alle Zeitpunkte konstant, um die Auswirkungen der \gls{scd}-Typen 
+isoliert an der Kundendimension beobachten zu können.
 
 % ============================================================
 % 6. ETL-PROZESSE
