@@ -324,7 +324,11 @@ den zugehörigen Kunden- und Produktstammdaten. Im dbt-Stack werden äquivalente
 definiert (\texttt{not\_null}, \texttt{unique}, \texttt{relationships}).
 
 \subsection{SCD Typ 1 -- Implementierung und Ergebnis}
-% TODO
+Die Implementierung von \gls{scd} Typ 1 prüft für jeden Kunden in der Staging-Tabelle, ob bereits ein 
+Eintrag in der Dimensionstabelle existiert. Ist dies der Fall, werden alle Attribute mit den neuen Werten 
+überschrieben. Neue Kunden werden als neue Datensätze eingefügt. Nach dem Laden aller drei Zeitpunkte enthält 
+die Tabelle weiterhin fünf Zeilen, die ursprünglichen Werte sind nicht mehr nachvollziehbar. So wurde 
+beispielsweise der Name von Kunde 1 von \enquote{Maxx} zu \enquote{Max} korrigiert, ohne dass der vorherige Wert erhalten bleibt.
 
 \subsection{SCD Typ 2 -- Implementierung und Ergebnis}
 % TODO
