@@ -331,7 +331,12 @@ die Tabelle weiterhin fünf Zeilen, die ursprünglichen Werte sind nicht mehr na
 beispielsweise der Name von Kunde 1 von \enquote{Maxx} zu \enquote{Max} korrigiert, ohne dass der vorherige Wert erhalten bleibt.
 
 \subsection{SCD Typ 2 -- Implementierung und Ergebnis}
-% TODO
+Bei \gls{scd} Typ 2 wird bei jeder Änderung der bestehende Datensatz mit einem Enddatum geschlossen 
+und ein neuer Datensatz mit den aktuellen Werten angelegt. Jeder Ladevorgang erhält ein explizites 
+Ladedatum als Parameter. Die Implementierung vergleicht alle Attribute des Staging-Datensatzes mit 
+dem aktuell gültigen Eintrag in der Dimensionstabelle. Nach dem Laden aller drei Zeitpunkte enthält 
+die Tabelle elf Zeilen statt fünf. So ist bei Kunde 1 nachvollziehbar, dass zunächst der Name korrigiert 
+und anschließend ein Umzug von Berlin nach Stuttgart stattfand.
 
 \subsection{SCD Typ 3 -- Implementierung und Ergebnis}
 % TODO
