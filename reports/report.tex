@@ -304,7 +304,10 @@ isoliert an der Kundendimension beobachten zu können.
 \section{Prototypische Entwicklung der ETL-Prozesse}
 
 \subsection{Pipeline-Architektur}
-% TODO
+Die \gls{etl}-Pipeline folgt einem dreistufigen Aufbau: Zunächst werden die CSV-Quelldaten in Staging-Tabellen geladen 
+(Extract). Anschließend erfolgen automatisierte Datenqualitätsprüfungen (Transform). Abschließend werden die geprüften 
+Daten unter Anwendung der jeweiligen \gls{scd}-Logik in die Dimensionstabellen des \gls{dwh} überführt (Load). 
+Ein zentrales Pipeline-Skript orchestriert diesen Ablauf und ermöglicht die Ausführung aller drei \gls{scd}-Typen über einen einzelnen Befehl.
 
 \subsection{Staging Area}
 % TODO
