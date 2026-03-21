@@ -317,7 +317,11 @@ Die Staging-Tabellen übernehmen die Struktur der Quelldaten ohne zusätzliche T
 dienen als Ausgangspunkt für die anschließenden Qualitätsprüfungen und die \gls{scd}-Verarbeitung.
 
 \subsection{Datenqualitätsprüfungen}
-% TODO
+Vor jedem Ladevorgang in das \gls{dwh} werden automatisierte Qualitätsprüfungen auf den Staging-Tabellen 
+ausgeführt. Im Python-Prototyp umfassen diese drei Kategorien: Prüfung auf NULL- und Leerwerte in Pflichtfeldern, 
+Prüfung auf doppelte Business Keys sowie die Prüfung der referenziellen Integrität zwischen Verkaufsdaten und 
+den zugehörigen Kunden- und Produktstammdaten. Im dbt-Stack werden äquivalente Tests deklarativ in YAML-Dateien 
+definiert (\texttt{not\_null}, \texttt{unique}, \texttt{relationships}).
 
 \subsection{SCD Typ 1 -- Implementierung und Ergebnis}
 % TODO
