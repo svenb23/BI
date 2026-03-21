@@ -339,7 +339,10 @@ die Tabelle elf Zeilen statt fünf. So ist bei Kunde 1 nachvollziehbar, dass zun
 und anschließend ein Umzug von Berlin nach Stuttgart stattfand.
 
 \subsection{SCD Typ 3 -- Implementierung und Ergebnis}
-% TODO
+Bei \gls{scd} Typ 3 wird bei einer Änderung der aktuelle Wert in die Hauptspalte geschrieben und der bisherige 
+Wert in eine zusätzliche Spalte verschoben. Die Tabelle enthält nach allen drei Zeitpunkten weiterhin fünf Zeilen. 
+So zeigt Kunde 3 als aktuelle Stadt Frankfurt und als vorherige Stadt München. Die Limitation wird bei Kunde 1 sichtbar: 
+Obwohl sowohl eine Namenskorrektur als auch ein Umzug stattfanden, ist nur der letzte vorherige Wert gespeichert, ältere Änderungen gehen verloren.
 
 \subsection{Umsetzung mit dbt}
 % TODO
