@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage{tikz}
+\usetikzlibrary{positioning}
 
 \usepackage[scaled]{helvet}
 \renewcommand{\familydefault}{\sfdefault}
@@ -267,10 +268,22 @@ Historisierung durch Snapshots reduziert den manuellen Aufwand erheblich. Beide 
 \section{Erstellung des Datenmodells}
 
 \subsection{Star-Schema}
-% TODO
+Das Datenmodell folgt dem Star-Schema mit drei Dimensionstabellen und einer zentralen Faktentabelle 
+(siehe \cref{fig:star_schema} im Anhang). Die Faktentabelle \texttt{fakt\_verkauf} ist über Fremdschlüssel
+ mit den Dimensionstabellen \texttt{dim\_kunde}, \texttt{dim\_produkt} und \texttt{dim\_zeit} verbunden. 
+ Jede Verkaufstransaktion referenziert einen Kunden, ein Produkt und ein Datum.
 
 \subsection{Dimensionstabellen}
-% TODO
+Die Kundendimension (\texttt{dim\_kunde}) steht im Mittelpunkt der \gls{scd}-Demonstration. 
+Sie enthält die Attribute \texttt{kunden\_id}, \texttt{name}, \texttt{stadt}, \texttt{region} 
+und \texttt{kategorie}. Für die Historisierung nach Typ 2 werden zusätzlich die Spalten 
+\texttt{gueltig\_von}, \texttt{gueltig\_bis} und \texttt{ist\_aktuell} geführt. Für Typ 3 
+existieren die Spalten \texttt{vorherige\_stadt}, \texttt{vorherige\_region} und \texttt{vorherige\_kategorie}.
+
+Die Produktdimension (\texttt{dim\_produkt}) enthält \texttt{produkt\_id}, \texttt{bezeichnung}, 
+\texttt{produktgruppe} und \texttt{preis}. Die Zeitdimension (\texttt{dim\_zeit}) wird aus einem 
+generierten Datumsbereich für das Jahr 2025 aufgebaut und enthält die Attribute \texttt{datum}, 
+\texttt{jahr}, \texttt{monat}, \texttt{quartal}, \texttt{tag} und \texttt{wochentag}.
 
 \subsection{Faktentabelle}
 % TODO
@@ -340,6 +353,25 @@ Historisierung durch Snapshots reduziert den manuellen Aufwand erheblich. Beide 
 \addcontentsline{toc}{section}{Anhang}
 
 % TODO: Quellcode, Screenshots, vollständige Tabellen
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    table/.style={rectangle, draw, minimum width=2.8cm, minimum height=1.2cm, align=center, font=\small},
+    fact/.style={table, fill=gray!20, minimum width=3.2cm},
+]
+\node[fact] (fakt) {fakt\_verkauf};
+\node[table] (kunde) [above left=1.5cm and 2cm of fakt] {dim\_kunde};
+\node[table] (produkt) [above right=1.5cm and 2cm of fakt] {dim\_produkt};
+\node[table] (zeit) [below=1.5cm of fakt] {dim\_zeit};
+
+\draw[-] (fakt) -- (kunde);
+\draw[-] (fakt) -- (produkt);
+\draw[-] (fakt) -- (zeit);
+\end{tikzpicture}
+\caption{Star-Schema des Datenmodells}
+\label{fig:star_schema}
+\end{figure}
 
 \begin{table}[H]
 \centering
