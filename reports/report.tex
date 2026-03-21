@@ -310,7 +310,11 @@ Daten unter Anwendung der jeweiligen \gls{scd}-Logik in die Dimensionstabellen d
 Ein zentrales Pipeline-Skript orchestriert diesen Ablauf und ermöglicht die Ausführung aller drei \gls{scd}-Typen über einen einzelnen Befehl.
 
 \subsection{Staging Area}
-% TODO
+Die Staging Area bildet die Schnittstelle zwischen Quellsystem und \gls{dwh}. Für jeden 
+Ladevorgang werden die CSV-Quelldaten vollständig in die Staging-Tabellen \texttt{stg\_kunde}, 
+\texttt{stg\_produkt} und \texttt{stg\_verkauf} geladen, wobei der vorherige Inhalt ersetzt wird. 
+Die Staging-Tabellen übernehmen die Struktur der Quelldaten ohne zusätzliche Transformationen und 
+dienen als Ausgangspunkt für die anschließenden Qualitätsprüfungen und die \gls{scd}-Verarbeitung.
 
 \subsection{Datenqualitätsprüfungen}
 % TODO
