@@ -328,7 +328,7 @@ Die Implementierung von \gls{scd} Typ 1 prüft für jeden Kunden in der Staging-
 Eintrag in der Dimensionstabelle existiert. Ist dies der Fall, werden alle Attribute mit den neuen Werten 
 überschrieben. Neue Kunden werden als neue Datensätze eingefügt. Nach dem Laden aller drei Zeitpunkte enthält 
 die Tabelle weiterhin fünf Zeilen, die ursprünglichen Werte sind nicht mehr nachvollziehbar. So wurde 
-beispielsweise der Name von Kunde 1 von \enquote{Maxx} zu \enquote{Max} korrigiert, ohne dass der vorherige Wert erhalten bleibt.
+beispielsweise der Name von Kunde 1 von \enquote{Maxx} zu \enquote{Max} korrigiert, ohne dass der vorherige Wert erhalten bleibt (siehe \cref{tab:scd1_result} im Anhang).
 
 \subsection{SCD Typ 2 -- Implementierung und Ergebnis}
 Bei \gls{scd} Typ 2 wird bei jeder Änderung der bestehende Datensatz mit einem Enddatum geschlossen 
@@ -336,13 +336,13 @@ und ein neuer Datensatz mit den aktuellen Werten angelegt. Jeder Ladevorgang erh
 Ladedatum als Parameter. Die Implementierung vergleicht alle Attribute des Staging-Datensatzes mit 
 dem aktuell gültigen Eintrag in der Dimensionstabelle. Nach dem Laden aller drei Zeitpunkte enthält 
 die Tabelle elf Zeilen statt fünf. So ist bei Kunde 1 nachvollziehbar, dass zunächst der Name korrigiert 
-und anschließend ein Umzug von Berlin nach Stuttgart stattfand.
+und anschließend ein Umzug von Berlin nach Stuttgart stattfand (siehe \cref{tab:scd2_result} im Anhang).
 
 \subsection{SCD Typ 3 -- Implementierung und Ergebnis}
 Bei \gls{scd} Typ 3 wird bei einer Änderung der aktuelle Wert in die Hauptspalte geschrieben und der bisherige 
 Wert in eine zusätzliche Spalte verschoben. Die Tabelle enthält nach allen drei Zeitpunkten weiterhin fünf Zeilen. 
 So zeigt Kunde 3 als aktuelle Stadt Frankfurt und als vorherige Stadt München. Die Limitation wird bei Kunde 1 sichtbar: 
-Obwohl sowohl eine Namenskorrektur als auch ein Umzug stattfanden, ist nur der letzte vorherige Wert gespeichert, ältere Änderungen gehen verloren.
+Obwohl sowohl eine Namenskorrektur als auch ein Umzug stattfanden, ist nur der letzte vorherige Wert gespeichert, ältere Änderungen gehen verloren (siehe \cref{tab:scd3_result} im Anhang).
 
 \subsection{Umsetzung mit dbt}
 Die Umsetzung mit \gls{dbt} und PostgreSQL zeigt, wie die gleichen \gls{scd}-Konzepte mit einem spezialisierten 
@@ -467,6 +467,63 @@ Zeilen (nach 3 Tagen) & 5 & 11 & 5 \\
 Historie & Keine & Vollständig & 1 Vorgänger \\
 Komplexität & Gering & Hoch & Mittel \\
 Speicherbedarf & Konstant & Wachsend & Konstant \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Ergebnis SCD Typ 1 -- Kundendimension nach Tag 3}
+\label{tab:scd1_result}
+\begin{tabular}{rllll}
+\toprule
+\textbf{ID} & \textbf{Name} & \textbf{Stadt} & \textbf{Region} & \textbf{Kategorie} \\
+\midrule
+1 & Max Müller & Stuttgart & Süd & Standard \\
+2 & Anna Schmidt & Hamburg & Nord & Gold \\
+3 & Tom Weber & Frankfurt & West & Standard \\
+4 & Lisa Fischer & Köln & West & Premium \\
+5 & Jann Hoffmann & Dresden & Ost & Premium \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Ergebnis SCD Typ 2 -- Kundendimension nach Tag 3}
+\label{tab:scd2_result}
+\begin{tabular}{rrlllllr}
+\toprule
+\textbf{SK} & \textbf{ID} & \textbf{Name} & \textbf{Stadt} & \textbf{Region} & \textbf{Von} & \textbf{Bis} & \textbf{Akt.} \\
+\midrule
+1 & 1 & Maxx Müller & Berlin & Ost & 2025-01-01 & 2025-02-01 & 0 \\
+6 & 1 & Max Müller & Berlin & Ost & 2025-02-01 & 2025-03-01 & 0 \\
+9 & 1 & Max Müller & Stuttgart & Süd & 2025-03-01 & 9999-12-31 & 1 \\
+2 & 2 & Anna Schmidt & Hamburg & Nord & 2025-01-01 & 2025-03-01 & 0 \\
+10 & 2 & Anna Schmidt & Hamburg & Nord & 2025-03-01 & 9999-12-31 & 1 \\
+3 & 3 & Tom Weber & München & Süd & 2025-01-01 & 2025-02-01 & 0 \\
+7 & 3 & Tom Weber & Frankfurt & West & 2025-02-01 & 9999-12-31 & 1 \\
+4 & 4 & Lisa Fischer & Köln & West & 2025-01-01 & 2025-02-01 & 0 \\
+8 & 4 & Lisa Fischer & Köln & West & 2025-02-01 & 9999-12-31 & 1 \\
+5 & 5 & Jan Hoffmann & Dresden & Ost & 2025-01-01 & 2025-03-01 & 0 \\
+11 & 5 & Jann Hoffmann & Dresden & Ost & 2025-03-01 & 9999-12-31 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Ergebnis SCD Typ 3 -- Kundendimension nach Tag 3}
+\label{tab:scd3_result}
+\begin{tabular}{rllllll}
+\toprule
+\textbf{ID} & \textbf{Name} & \textbf{Stadt} & \textbf{Vorh. Stadt} & \textbf{Kat.} & \textbf{Vorh. Kat.} \\
+\midrule
+1 & Max Müller & Stuttgart & Berlin & Standard & -- \\
+2 & Anna Schmidt & Hamburg & -- & Gold & Premium \\
+3 & Tom Weber & Frankfurt & München & Standard & -- \\
+4 & Lisa Fischer & Köln & -- & Premium & Standard \\
+5 & Jann Hoffmann & Dresden & -- & Premium & -- \\
 \bottomrule
 \end{tabular}
 \end{table}
