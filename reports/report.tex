@@ -420,17 +420,52 @@ Kombination mit Cloud Data Warehouses wie Snowflake verhalten.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
-    table/.style={rectangle, draw, minimum width=2.8cm, minimum height=1.2cm, align=center, font=\small},
-    fact/.style={table, fill=gray!20, minimum width=3.2cm},
+    header/.style={rectangle, draw, fill=gray!30, minimum width=3.8cm, font=\small\bfseries, inner sep=4pt},
+    column/.style={rectangle, draw, minimum width=3.8cm, font=\small\ttfamily, inner sep=3pt, anchor=north},
+    fheader/.style={rectangle, draw, fill=blue!15, minimum width=4.2cm, font=\small\bfseries, inner sep=4pt},
+    fcolumn/.style={rectangle, draw, minimum width=4.2cm, font=\small\ttfamily, inner sep=3pt, anchor=north},
+    pk/.style={font=\small\ttfamily\bfseries},
+    fk/.style={font=\small\ttfamily\itshape},
 ]
-\node[fact] (fakt) {fakt\_verkauf};
-\node[table] (kunde) [above left=1.5cm and 2cm of fakt] {dim\_kunde};
-\node[table] (produkt) [above right=1.5cm and 2cm of fakt] {dim\_produkt};
-\node[table] (zeit) [below=1.5cm of fakt] {dim\_zeit};
 
-\draw[-] (fakt) -- (kunde);
-\draw[-] (fakt) -- (produkt);
-\draw[-] (fakt) -- (zeit);
+% dim_kunde
+\node[header] (kh) at (-5.5, 3) {dim\_kunde};
+\node[column, pk] (k1) at ([yshift=-0.5pt]kh.south) {sk\_kunde (PK)};
+\node[column] (k2) at ([yshift=-0.5pt]k1.south) {kunden\_id};
+\node[column] (k3) at ([yshift=-0.5pt]k2.south) {name};
+\node[column] (k4) at ([yshift=-0.5pt]k3.south) {stadt / region};
+\node[column] (k5) at ([yshift=-0.5pt]k4.south) {kategorie};
+\node[column] (k6) at ([yshift=-0.5pt]k5.south) {gueltig\_von / bis};
+
+% dim_produkt
+\node[header] (ph) at (5.5, 3) {dim\_produkt};
+\node[column, pk] (p1) at ([yshift=-0.5pt]ph.south) {sk\_produkt (PK)};
+\node[column] (p2) at ([yshift=-0.5pt]p1.south) {produkt\_id};
+\node[column] (p3) at ([yshift=-0.5pt]p2.south) {bezeichnung};
+\node[column] (p4) at ([yshift=-0.5pt]p3.south) {produktgruppe};
+\node[column] (p5) at ([yshift=-0.5pt]p4.south) {preis};
+
+% fakt_verkauf
+\node[fheader] (fh) at (0, 0) {fakt\_verkauf};
+\node[fcolumn, pk] (f1) at ([yshift=-0.5pt]fh.south) {verkauf\_id (PK)};
+\node[fcolumn, fk] (f2) at ([yshift=-0.5pt]f1.south) {sk\_kunde (FK)};
+\node[fcolumn, fk] (f3) at ([yshift=-0.5pt]f2.south) {sk\_produkt (FK)};
+\node[fcolumn, fk] (f4) at ([yshift=-0.5pt]f3.south) {datum (FK)};
+\node[fcolumn] (f5) at ([yshift=-0.5pt]f4.south) {menge};
+\node[fcolumn] (f6) at ([yshift=-0.5pt]f5.south) {umsatz};
+
+% dim_zeit
+\node[header] (zh) at (0, -5) {dim\_zeit};
+\node[column, pk] (z1) at ([yshift=-0.5pt]zh.south) {datum (PK)};
+\node[column] (z2) at ([yshift=-0.5pt]z1.south) {jahr / monat};
+\node[column] (z3) at ([yshift=-0.5pt]z2.south) {quartal / tag};
+\node[column] (z4) at ([yshift=-0.5pt]z3.south) {wochentag};
+
+% Beziehungen
+\draw[-latex, thick] (f2.west) -- node[above, font=\scriptsize] {n:1} (k6.east);
+\draw[-latex, thick] (f3.east) -- node[above, font=\scriptsize] {n:1} (p5.west);
+\draw[-latex, thick] (f4.south) -- node[right, font=\scriptsize] {n:1} (zh.north);
+
 \end{tikzpicture}
 \caption{Star-Schema des Datenmodells}
 \label{fig:star_schema}
