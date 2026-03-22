@@ -365,7 +365,17 @@ elf Zeilen an, da jede Änderung als neuer Datensatz mit Gültigkeitszeitraum er
 Zeilenanzahl bei fünf, wobei der jeweils letzte vorherige Wert in einer zusätzlichen Spalte gespeichert ist.
 
 \subsection{Vor- und Nachteile der SCD-Typen}
-% TODO
+Typ 1 besticht durch seine Einfachheit: Die Implementierung ist unkompliziert, der Speicherbedarf bleibt 
+konstant und Abfragen erfordern keine zeitliche Filterung. Der Nachteil liegt im vollständigen Verlust 
+historischer Daten, wodurch zeitbezogene Analysen unmöglich werden.
+
+Typ 2 bietet die umfassendste Lösung, da jede Änderung mit Gültigkeitszeitraum dokumentiert wird. Dadurch 
+sind zeitpunktbezogene Auswertungen möglich. Die Nachteile sind ein wachsender Speicherbedarf sowie komplexere 
+Abfragen, die stets den Aktualitätsstatus berücksichtigen müssen.
+
+Typ 3 stellt einen Kompromiss dar: Die Tabellenstruktur bleibt stabil und Abfragen bleiben einfach. Allerdings 
+kann nur ein einziger vorheriger Wert gespeichert werden. Bei mehrfachen Änderungen gehen ältere Werte verloren, 
+wie das Beispiel von Kunde 1 gezeigt hat.
 
 \subsection{Empfehlung für die Praxis}
 % TODO
