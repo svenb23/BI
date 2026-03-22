@@ -378,7 +378,11 @@ kann nur ein einziger vorheriger Wert gespeichert werden. Bei mehrfachen Änderu
 wie das Beispiel von Kunde 1 gezeigt hat.
 
 \subsection{Empfehlung für die Praxis}
-% TODO
+In der Praxis wird selten nur ein einzelner \gls{scd}-Typ eingesetzt. Stattdessen empfiehlt es sich, die 
+Typen je nach Attribut innerhalb derselben Dimensionstabelle zu kombinieren \parencite[S.~183]{linstedt2015data}. 
+Attribute, die bei Fehlern korrigiert werden, eignen sich für Typ 1. Geschäftskritische Attribute wie Adressen 
+oder Zuständigkeiten, deren Veränderung analytisch relevant ist, sollten mit Typ 2 historisiert werden. Typ 3 
+kann ergänzend eingesetzt werden, wenn lediglich der unmittelbar vorherige Wert für Vergleiche benötigt wird.
 
 % ============================================================
 % 8. FAZIT
