@@ -388,7 +388,17 @@ kann ergänzend eingesetzt werden, wenn lediglich der unmittelbar vorherige Wert
 % 8. FAZIT
 % ============================================================
 \section{Fazit und Ausblick}
-% TODO
+Die vorliegende Arbeit hat die drei \gls{scd}-Typen 1, 2 und 3 anhand eines konkreten Geschäftsszenarios prototypisch 
+umgesetzt und verglichen. Die Implementierung erfolgte zunächst mit Python und SQLite, anschließend mit dbt und PostgreSQL. 
+Beide Umsetzungen liefern konsistente Ergebnisse und demonstrieren die jeweiligen Stärken und Limitationen der drei Typen.
+
+Die Gegenüberstellung zeigt, dass kein einzelner \gls{scd}-Typ für alle Anwendungsfälle geeignet ist. Die Wahl hängt 
+von den fachlichen Anforderungen an die Historisierung ab. In der Praxis empfiehlt sich eine Kombination der Typen innerhalb einer Dimensionstabelle.
+
+Der Einsatz von dbt hat gezeigt, dass spezialisierte Werkzeuge die Umsetzung von \gls{scd} erheblich vereinfachen können. 
+Insbesondere die automatische Historisierung durch Snapshots reduziert den Implementierungsaufwand gegenüber einer 
+manuellen Lösung. Weiterführend könnte untersucht werden, wie sich die \gls{scd}-Typen bei größeren Datenmengen und in 
+Kombination mit Cloud Data Warehouses wie Snowflake verhalten.
 
 % ============================================================
 % LITERATURVERZEICHNIS
