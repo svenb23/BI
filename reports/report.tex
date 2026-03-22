@@ -155,7 +155,7 @@ Die Arbeit gliedert sich in acht Kapitel. Nach der Einleitung werden in Kapitel~
 Grundlagen zu Data Warehousing, ETL-Prozessen und Slowly Changing Dimensions erläutert. Kapitel~3 beschreibt 
 die Konzeption der Beispielszenarien. In Kapitel~4 erfolgt die Auswahl und Begründung der eingesetzten Werkzeuge. 
 Kapitel~5 stellt das erstellte Datenmodell vor. Die prototypische Implementierung der ETL-Prozesse wird in 
-Kapitel~6 dokumentiert. Kapitel~7 vergleicht die Ergebnisse der drei SCD-Typen. Die Arbeit schließt mit einem Fazit in Kapitel~8.
+Kapitel~6 dokumentiert. Kapitel~7 vergleicht die Ergebnisse der drei SCD-Typen. Die Arbeit schließt mit einem Fazit in Kapitel~8. Der gesamte Quellcode wird über ein GitHub-Repository versioniert und ist unter \url{https://github.com/svenb23/BI} öffentlich zugänglich.
 
 % ============================================================
 % 2. THEORETISCHE GRUNDLAGEN
@@ -307,7 +307,7 @@ isoliert an der Kundendimension beobachten zu können.
 Die \gls{etl}-Pipeline folgt einem dreistufigen Aufbau: Zunächst werden die CSV-Quelldaten in Staging-Tabellen geladen 
 (Extract). Anschließend erfolgen automatisierte Datenqualitätsprüfungen (Transform). Abschließend werden die geprüften 
 Daten unter Anwendung der jeweiligen \gls{scd}-Logik in die Dimensionstabellen des \gls{dwh} überführt (Load). 
-Ein zentrales Pipeline-Skript orchestriert diesen Ablauf und ermöglicht die Ausführung aller drei \gls{scd}-Typen über einen einzelnen Befehl.
+Ein zentrales Pipeline-Skript orchestriert diesen Ablauf und ermöglicht die Ausführung aller drei \gls{scd}-Typen über einen einzelnen Befehl (siehe \cref{fig:pipeline} im Anhang).
 
 \subsection{Staging Area}
 Die Staging Area bildet die Schnittstelle zwischen Quellsystem und \gls{dwh}. Für jeden 
@@ -400,6 +400,8 @@ Insbesondere die automatische Historisierung durch Snapshots reduziert den Imple
 manuellen Lösung. Weiterführend könnte untersucht werden, wie sich die \gls{scd}-Typen bei größeren Datenmengen und in 
 Kombination mit Cloud Data Warehouses wie Snowflake verhalten.
 
+Der vollständige Quellcode beider Implementierungen ist im zugehörigen GitHub-Repository verfügbar: \url{https://github.com/svenb23/BI}.
+
 % ============================================================
 % LITERATURVERZEICHNIS
 % ============================================================
@@ -416,6 +418,40 @@ Kombination mit Cloud Data Warehouses wie Snowflake verhalten.
 \addcontentsline{toc}{section}{Anhang}
 
 % TODO: Quellcode, Screenshots, vollständige Tabellen
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    box/.style={rectangle, draw, rounded corners, minimum width=3.5cm, minimum height=1cm, align=center, font=\small},
+    source/.style={box, fill=orange!15},
+    stage/.style={box, fill=yellow!15},
+    check/.style={box, fill=red!10},
+    dwh/.style={box, fill=blue!15},
+    arrow/.style={-latex, thick},
+]
+
+% Nodes
+\node[source] (csv) at (0, 0) {CSV-Quelldaten\\(Quellsystem)};
+\node[stage] (staging) at (0, -2) {Staging Area\\(\texttt{stg\_*})};
+\node[check] (quality) at (0, -4) {Datenqualitäts-\\prüfungen};
+\node[dwh] (scd) at (0, -6) {SCD-Verarbeitung\\(Typ 1 / 2 / 3)};
+\node[dwh] (dim) at (0, -8) {Dimensionen \&\\Faktentabelle};
+
+% Phase labels
+\node[font=\small\bfseries, color=gray] at (3.5, 0) {Extract};
+\node[font=\small\bfseries, color=gray] at (3.5, -4) {Transform};
+\node[font=\small\bfseries, color=gray] at (3.5, -7) {Load};
+
+% Arrows
+\draw[arrow] (csv) -- (staging);
+\draw[arrow] (staging) -- (quality);
+\draw[arrow] (quality) -- (scd);
+\draw[arrow] (scd) -- (dim);
+
+\end{tikzpicture}
+\caption{ETL-Pipeline-Architektur}
+\label{fig:pipeline}
+\end{figure}
 
 \begin{figure}[H]
 \centering
