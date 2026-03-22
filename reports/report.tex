@@ -345,7 +345,12 @@ So zeigt Kunde 3 als aktuelle Stadt Frankfurt und als vorherige Stadt München. 
 Obwohl sowohl eine Namenskorrektur als auch ein Umzug stattfanden, ist nur der letzte vorherige Wert gespeichert, ältere Änderungen gehen verloren.
 
 \subsection{Umsetzung mit dbt}
-% TODO
+Die Umsetzung mit \gls{dbt} und PostgreSQL zeigt, wie die gleichen \gls{scd}-Konzepte mit einem spezialisierten 
+Werkzeug realisiert werden. Die CSV-Quelldaten werden als Seeds in die Datenbank geladen. Staging- und Warehouse-Models 
+transformieren die Daten als SQL-Views und -Tabellen. Für \gls{scd} Typ 2 kommt die Snapshot-Funktionalität von dbt zum Einsatz: 
+Über eine \texttt{check}-Strategie werden alle relevanten Spalten überwacht und Änderungen automatisch mit 
+Zeitstempeln (\texttt{dbt\_valid\_from}, \texttt{dbt\_valid\_to}) historisiert. Das Ergebnis entspricht 
+mit elf Zeilen dem des Python-Prototyps und bestätigt die korrekte Umsetzung.
 
 % ============================================================
 % 7. ERGEBNISSE UND VERGLEICH
